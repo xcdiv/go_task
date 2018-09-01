@@ -88,6 +88,14 @@ go_task.domain("域").pop(当前页面等级）
                     
 ### 绘制表格 Tables
 
+| Tables | Are | Cool | 
+|----------|:-------------:|------:| 
+| col 1 is | left-aligned | $1600 | 
+| col 2 is | centered | $12 | 
+| col 3 is | right-aligned | $1 |
+
+
+ 
 ----
 
 |等级        |介绍                                                                 |跳转记录                                   |获取返回地址                      |
