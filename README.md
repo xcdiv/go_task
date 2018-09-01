@@ -1,6 +1,10 @@
 # go_task
+#注意当使用正式环境的时候是不采用Cookie的请把go_task.js里面的
+var isEMU = true;
+改为
+var isEMU = false;
 
-河南有线做CP/SP集成的时候，如果有推荐功能则按一下流程处理
+#河南有线做CP/SP集成的时候，如果有推荐功能则按一下流程处理
 ```html
 <script src="go_task.js"></script>
 ```
