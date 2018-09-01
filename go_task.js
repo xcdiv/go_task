@@ -28,7 +28,7 @@ var go_task = {
 
         val = val.replace(/#DEBUG#/gi, _gp.__debug);
         val = val.replace(/#PGT#/gi, getPgt());
-
+        val = val.replace(/#TVN#/gi, getTVN());
         return val;
     }
     , Cookie: new function () {
