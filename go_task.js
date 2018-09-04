@@ -16,7 +16,7 @@ var isEMU = true;
 //# 增强的portalms模板返回逻辑    #
 //#################################
 var go_task = {
-    version: 1.2
+    version: 1.3
     , isEmu: false
     , _domain: ""
     , domain: function (val) {
@@ -92,8 +92,6 @@ var go_task = {
 
         this.LIST = [];
 
-
-
         if (go_task.isEmu) {
 
             Cookie.add(this._domain + "superRootUrl", "default");
@@ -102,18 +100,15 @@ var go_task = {
             var gvarRootUrl = new Global(this._domain + "superRootUrl");
             var gvarRootType = new Global(this._domain + "superRootType");
 
-
             gvarRootUrl.value = 'default';
             gvarRootType.value = 'default';
             go_task.sync_g();
         }
-
-
-
     }
     , return_root: function () {
+        var gvarRootUrl = new Global("superRootUrl");
 
-        if (gvarRootUrl.value != 'default') {
+        if (gvarRootUrl.value != '' && gvarRootUrl.value != 'default') {
             return gvarRootUrl.value;
         }
         return null;
@@ -249,6 +244,26 @@ var go_task = {
            this.sync_write();
            return url;
        }
+    /*
+    go_task.mpop([])
+    */
+    , mpop: function (arr) {
+        var _url = null;
+
+        if (typeof arr == "object") { 
+            for (var i = 0; i < arr.length; i++) {
+
+                _url = this.domain(arr[0]).pop(arr[1]);
+                if (_url != null) {
+
+                    return _url;
+                    break;
+                } 
+            } 
+        } 
+        return _url;
+
+    }
     , sync_read: function () {
 
 
