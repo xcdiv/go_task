@@ -106,10 +106,21 @@ var go_task = {
         }
     }
     , return_root: function () {
-        var gvarRootUrl = new Global("superRootUrl");
 
-        if (gvarRootUrl.value != '' && gvarRootUrl.value != 'default') {
-            return gvarRootUrl.value;
+        if (go_task.isEmu) {
+
+            if (go_task.Cookie.exists("superRootUrl") && go_task.Cookie.get("superRootUrl") != 'default') {
+                _return_url = go_task.Cookie.get("superRootUrl");
+
+                return _return_url;
+            }
+
+        } else {
+
+            var gvarRootUrl = new Global("superRootUrl");
+            if (gvarRootUrl.value != '' && gvarRootUrl.value != 'default') {
+                return gvarRootUrl.value;
+            }
         }
         return null;
     }
@@ -244,23 +255,58 @@ var go_task = {
            this.sync_write();
            return url;
        }
+
+    , force_return: function () {
+
+        if (navigator.userAgent.indexOf("Avit-09") == -1) {
+            window.location = "file://htmldata/index.htm";
+        } else {
+            try {
+                method.finishWebLauncher();//09盒子返回到桌面
+            } catch (e) { }
+        }
+    }
     /*
-    go_task.mpop([])
+    多pop方法，按顺序处理多个返回逻辑，简化返回键的逻辑
+    go_task.mpop(["5::domainA"
+                    ,"16::domainB"
+                    ,"-1"
+                    ,"-2"])
+    标准pop   层级::域
+    内置      -1      河南有线的返回标准V2
+              -2      河南有线的返回标准V1
     */
     , mpop: function (arr) {
         var _url = null;
 
-        if (typeof arr == "object") { 
+        if (typeof arr == "object") {
             for (var i = 0; i < arr.length; i++) {
 
-                _url = this.domain(arr[0]).pop(arr[1]);
-                if (_url != null) {
-
-                    return _url;
-                    break;
-                } 
-            } 
-        } 
+                //正常的pop()返回处理
+                if (arr[i].indexOf("::") > -1) {
+                    var item = arr[i].split("::");
+                    _url = this.domain(item[1]).pop(parseInt(item[0]));
+                    if (_url != null) {
+                        return _url;
+                        break;
+                    }  
+                    //返回河南有线的返回标准V2，superRootUrl!=default superRootType==1
+                } else if (arr[i] == "-1") {
+                    _url = go_task.hncatv_return_check();
+                    if (_url != null) {
+                        return _url;
+                        break;
+                    }
+                    //返回河南有线的返回标准V1，superRootUrl!=default
+                } else if (arr[i].level == "-2") {
+                    _url = go_task.return_root();
+                    if (_url != null) {
+                        return _url;
+                        break;
+                    }
+                }
+            }
+        }
         return _url;
 
     }
