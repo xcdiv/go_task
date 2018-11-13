@@ -78,11 +78,11 @@ en->t3->t2->begin
 
 go_task就可以解决这个问题，通过push()和pop()就可以解决业务的动态层级返回问题
 
-##push(int,string)
+##set(int,string)
 ##本页跳转之前提交返回地址
 
 ```html
-go_task.domain("域").push(等级,”http://返回地址“）
+go_task.domain("域").set(等级,”http://返回地址“）
 
 ```
 ###等级 int
