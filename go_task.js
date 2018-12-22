@@ -16,7 +16,11 @@ var isEMU = false;
 //# 增强的portalms模板返回逻辑    #
 //#################################
 var go_task = {
+<<<<<<< HEAD
     version: 1.5
+=======
+    version: 1.3
+>>>>>>> 6623f336144fc39d55c69d53c80308f88bf3a9ee
     , isEmu: false
     , _domain: ""
     , domain: function (val) {
@@ -99,6 +103,7 @@ var go_task = {
 
         } else {
 
+<<<<<<< HEAD
             go_task.Ajax.get(val, function (data) {
                 _data = data;
             }, false, false);
@@ -237,6 +242,11 @@ var go_task = {
         if (val.indexOf('#TVN#') > -1) {
             val = val.replace(/#TVN#/gi, go_task.getTVN());
         }
+=======
+        val = val.replace(/#DEBUG#/gi, _gp.__debug);
+        val = val.replace(/#PGT#/gi, getPgt());
+        val = val.replace(/#TVN#/gi, getTVN());
+>>>>>>> 6623f336144fc39d55c69d53c80308f88bf3a9ee
         return val;
     }
     , Cookie: new function () {
@@ -499,7 +509,11 @@ var go_task = {
                     if (_url != null) {
                         return _url;
                         break;
+<<<<<<< HEAD
                     }
+=======
+                    }  
+>>>>>>> 6623f336144fc39d55c69d53c80308f88bf3a9ee
                     //返回河南有线的返回标准V2，superRootUrl!=default superRootType==1
                 } else if (arr[i] == "-1") {
                     _url = go_task.hncatv_return_check();
