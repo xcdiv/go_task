@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="jquery-1.4.4.min.js"></script>
+    <script src="go_task.js"></script>
+
+    <script>
+      
+        //页面第一次加载的时候处理
+        $(document).ready(function () {
+
+          
+            go_task.domain("test")
+                .probe({ "href": window.location.href, "onact": 1, "title": "测试probe页", "spcode": "OP0001" });
+
+
+
+            $('#check').click(function () {
+
+
+                go_task.domain("test")
+               .probe({
+                   "href": window.location.href
+                   , "onact": 2
+                   , "title": "测试probe页跳转"
+                   , "spcode": "OP0001"
+                   , "level": 2
+                    
+               });
+
+            });
+
+        });
+
+
+
+
+    </script>
+
+</head>
+<body>
+    
+    <input id="check" value="测试probe" type="button" />
+
+
+</body>
+</html>

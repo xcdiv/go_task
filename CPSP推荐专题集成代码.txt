@@ -1,0 +1,23 @@
+ 
+	处理返回事件的时候按照以下逻辑处理：
+
+ 	    var _return_url = go_task.domain("").hncatv_return_check();
+
+                    var _return_root = go_task.domain("").return_root();
+
+
+                    if (_return_url) {
+                        window.location = _return_url;
+                    }
+                    else  if (_return_root) {
+                       window.location = _return_root;
+                    }
+	    //退出到机顶盒首页
+                    //屏蔽09款盒子返回默认处理  add by kon9od on 2013.12.15 
+                    else if (navigator.userAgent.indexOf("Avit-09") == -1) {
+                        window.location = "file://htmldata/index.htm";
+                    } else {
+                        try {
+                            method.finishWebLauncher();//09盒子返回到桌面
+                        } catch (e) { }
+                    }

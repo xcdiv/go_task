@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="jquery-1.4.4.min.js"></script>
+    <script src="go_task.js"></script>
+
+    <script>
+      
+        //页面第一次加载的时候处理
+        $(document).ready(function () {
+
+          
+            go_task.domain("test")
+                .probe({ "href": window.location.href, "onact": 1, "title": "测试probe页", "spcode": "OP0001" });
+
+
+            var _tvn= go_task.getTVN(go_task.getPgt());
+
+            alert(  go_task.getPgt() + ":" + _tvn);
+
+
+            $('#check').click(function () {
+
+
+                go_task.domain("test")
+               .hn_probe({
+                   "href": window.location.href //你要跳转的地址
+                   , "type": 1 //0未知 1首页 2列表页 3图文 4视频 
+                   , "title": "测试probe页跳转" //你要跳转的连接标题
+                   , "spcode": "OP0001" // OP0010
+                   , "level": 2 //当前页面等级
+                   , 'classname': "分类1" //资料|省委办公厅
+
+               }).set(1, "");
+
+            });
+
+        });
+
+       // POST参数
+       // href                要跳转的链接
+       // title              链接的标题
+       // url                  跳转前的链接
+       // type              0未知 1首页 2列表页 3图文 4视频 
+       // tvn                 用户的TVN
+       // level              进入的页面层级
+       // spcode         sp代码
+       // classname    栏目的分类名字：例如：省委办公厅|XX科室
+ 
+
+
+    </script>
+
+</head>
+<body>
+    
+    <input id="check" value="测试probe" type="button" />
+
+
+</body>
+</html>
