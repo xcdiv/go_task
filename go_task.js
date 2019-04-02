@@ -1,14 +1,30 @@
-﻿
+
 //======================测试函数=========================//
-var _gp = {
-    __debug: ""
 
-};
-var getPgt = function () {
+if (typeof _gp == "undefined") {
+    _gp = {
+        __debug: ""
 
-    return "";
-};
-var isEMU = false;
+    };
+}
+
+
+if (typeof getPgt == "undefined") {
+    var getPgt = function () {
+
+        return "";
+    };
+}
+
+var isEMU=false;
+//谷歌浏览器开启调试模式
+if(navigator.userAgent.indexOf('Chrome') != -1){
+    isEMU=true;
+} else if (navigator.userAgent.indexOf('firefox') != -1) {
+    isEMU=true;
+} else if (navigator.userAgent.indexOf('safari') != -1) {
+    isEMU = true;
+}
 
 //======================测试函数=========================//
 
@@ -16,9 +32,9 @@ var isEMU = false;
 //# 增强的portalms模板返回逻辑    #
 //#################################
 var go_task = {
- 
-    version: 1.5
- 
+
+    version: 1.6
+    , tv_version :"07"
     , isEmu: false
     , _domain: ""
     , domain: function (val) {
@@ -79,10 +95,10 @@ var go_task = {
         }
         return this;
     }
-    , getTVN: function (pgt) { 
+    , getTVN: function (pgt) {
 
         var data=JSON.parse( go_task.getHttpRequest('http://ugo.kemei.henancatv.com:8000/APP/UGO/UGO_DVB_Handler.ashx?act=pgt2tvn&pgt=' + pgt));
-               
+
         if (data.status == "200") {
 
             return data.TVN;
@@ -100,7 +116,7 @@ var go_task = {
             }, false, false, wait);
 
         } else {
- 
+
             go_task.Ajax.get(val, function (data) {
                 _data = data;
             }, false, false);
@@ -199,7 +215,7 @@ var go_task = {
         //TGT-259451368-h00aLTPrhHgqarsGyYwC34iS0p5ugIFX0VOexfcpl9nsGhGzwb-cas
         /*
          * var getPgtUrl = "http://192.168.6.24:9005/stbsimulator/test";
-        
+
           var ret = getHttpRequest(getPgtUrl);
           var data = eval("(" + ret + ")");
             if(data.pgt != undefined){
@@ -239,7 +255,7 @@ var go_task = {
         if (val.indexOf('#TVN#') > -1) {
             val = val.replace(/#TVN#/gi, go_task.getTVN());
         }
- 
+
         return val;
     }
     , Cookie: new function () {
@@ -502,11 +518,7 @@ var go_task = {
                     if (_url != null) {
                         return _url;
                         break;
-<<<<<<< HEAD
                     }
-=======
-                    }  
->>>>>>> 6623f336144fc39d55c69d53c80308f88bf3a9ee
                     //返回河南有线的返回标准V2，superRootUrl!=default superRootType==1
                 } else if (arr[i] == "-1") {
                     _url = go_task.hncatv_return_check();
@@ -606,4 +618,13 @@ var go_task = {
 
         go_task.isEmu = true;
     }
+
+    if (navigator.userAgent.indexOf("Avit-09") == -1) {
+        go_task.tv_version = "07";
+
+    } else {
+        go_task.tv_version = "09";
+
+    }
+
 })();
