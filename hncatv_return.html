@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="go_task.js"></script>
+
+    <script>
+        
+        //通用返回逻辑
+        //sp_return 自己的业务返回地址
+        var url_back = function (sp_return) {
+
+            //获取河南有线的返回逻辑
+            var _return_url = go_task.mpop(["10::CIBN"
+                  , "16::hncatv"
+                  , "-1"
+                  , "-2"]);
+
+            //当 _return_url 存在返回地址则返回
+            if (_return_url) {
+
+                window.location.href = _return_url;
+                //sp自身的返回逻辑，SP可以自行修改
+            } if (sp_return) {
+
+                window.location.href = sp_return;
+            } else {
+
+                //如果以上逻辑都无正确返回地址，采用此方法可强制返回首页
+                go_task.force_return();
+            }
+
+        };
+
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
