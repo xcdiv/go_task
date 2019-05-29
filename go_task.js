@@ -20,12 +20,7 @@ var isEMU=false;
 //谷歌浏览器开启调试模式
 if(navigator.userAgent.indexOf('Chrome') != -1){
     isEMU=true;
-} else if (navigator.userAgent.indexOf('firefox') != -1) {
-    isEMU=true;
-} else if (navigator.userAgent.indexOf('safari') != -1) {
-    isEMU = true;
 }
-
 //======================测试函数=========================//
 
 //#################################
